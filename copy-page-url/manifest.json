@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Copy Page URL",
+  "version": "1.0",
+  "description": "Copy the current tab's URL using a custom keyboard shortcut.",
+  "permissions": ["activeTab", "scripting"],
+  "commands": {
+    "copy-url": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+C",
+        "mac": "Command+Shift+C"
+      },
+      "description": "Copy the current page's URL"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  }
+}
