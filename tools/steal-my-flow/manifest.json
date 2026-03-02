@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "Steal My Flow",
+  "version": "1.0",
+  "description": "Invisible efficiency. Do more, leave no trace.",
+  "permissions": ["activeTab", "scripting", "management"],
+  "commands": {
+    "copy-page-url": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+C",
+        "mac": "Command+Shift+C"
+      },
+      "description": "Capture location"
+    },
+    "swap-my-ex": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+X",
+        "mac": "Command+Shift+X"
+      },
+      "description": "Toggle state"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  }
+}
