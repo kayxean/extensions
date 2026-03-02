@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "Toggle Controller",
+  "version": "1.0",
+  "permissions": ["management"],
+  "commands": {
+    "toggle-controller": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+X"
+      },
+      "description": "Toggle my extension"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  }
+}
