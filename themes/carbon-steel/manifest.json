@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "Carbon Steel",
+  "version": "1.0",
+  "theme": {
+    "colors": {
+      "background_tab": [198, 199, 200],
+      "background_tab_inactive": [198, 199, 200],
+      "background_tab_incognito": [198, 199, 200],
+      "background_tab_incognito_inactive": [198, 199, 200],
+      "frame": [164, 165, 166],
+      "frame_inactive": [164, 165, 166],
+      "frame_incognito": [164, 165, 166],
+      "frame_incognito_inactive": [164, 165, 166],
+      "bookmark_text": [18, 19, 20],
+      "ntp_background": [198, 199, 200],
+      "ntp_text": [18, 19, 20],
+      "omnibox_background": [242, 243, 244],
+      "omnibox_text": [18, 19, 20],
+      "tab_background_text": [18, 19, 20],
+      "tab_background_text_inactive": [18, 19, 20],
+      "tab_background_text_incognito": [18, 19, 20],
+      "tab_background_text_incognito_inactive": [18, 19, 20],
+      "tab_text": [2, 3, 4],
+      "toolbar": [198, 199, 200],
+      "toolbar_button_icon": [36, 37, 38],
+      "toolbar_text": [18, 19, 20]
+    },
+    "tints": {
+      "background_tab": [-1, -1, -1],
+      "buttons": [-1, -1, -1],
+      "frame": [-1, -1, -1],
+      "frame_inactive": [-1, -1, -1],
+      "frame_incognito": [-1, -1, -1],
+      "frame_incognito_inactive": [-1, -1, -1]
+    }
+  }
+}
