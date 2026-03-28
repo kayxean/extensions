@@ -1,16 +1,8 @@
 {
   "name": "extensions",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "packageManager": "pnpm@10.26.1",
+  "private": true,
   "devDependencies": {
-    "@biomejs/biome": "^2.4.4"
-  }
+    "vite-plus": "^0.1.14"
+  },
+  "packageManager": "pnpm@10.33.0"
 }

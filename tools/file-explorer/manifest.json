@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "File Explorer",
+  "version": "1.0",
+  "permissions": ["sidePanel", "tabs", "scripting", "activeTab"],
+  "host_permissions": ["file:///*"],
+  "side_panel": {
+    "default_path": "sidepanel/index.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Open Side Panel"
+  }
+}
