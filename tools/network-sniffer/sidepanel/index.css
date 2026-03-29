@@ -1,0 +1,46 @@
+body {
+  font-family: system-ui, sans-serif;
+  margin: 0;
+  padding: 10px;
+  background: #f8f9fa;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background: #f8f9fa;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+#request-list {
+  list-style: none;
+  padding: 0;
+}
+
+.request-item {
+  font-size: 11px;
+  padding: 8px 4px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  gap: 8px;
+  overflow: hidden;
+}
+
+.time {
+  color: #888;
+  white-space: nowrap;
+}
+.method {
+  font-weight: bold;
+  color: #2a7ae2;
+}
+.url {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #333;
+}
