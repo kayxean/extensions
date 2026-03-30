@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Storage Listener",
+  "version": "1.0",
+  "permissions": ["sidePanel", "scripting", "activeTab", "storage", "cookies"],
+  "host_permissions": ["<all_urls>"],
+  "side_panel": {
+    "default_path": "sidepanel/index.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Open Side Panel"
+  }
+}
