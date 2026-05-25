@@ -7,13 +7,52 @@ body {
 
 header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 8px;
   position: sticky;
   top: 0;
   background: #f8f9fa;
   padding-bottom: 10px;
   border-bottom: 1px solid #ddd;
+  z-index: 10;
+}
+
+header h2 {
+  margin: 0;
+  font-size: 14px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 4px;
+}
+
+#filter {
+  flex: 1;
+  padding: 6px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+header button {
+  padding: 6px 10px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  background: white;
+  border-radius: 4px;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+header button:hover {
+  background: #f0f0f0;
+}
+
+header button.active {
+  background: #007bff;
+  color: white;
+  border-color: #007bff;
 }
 
 #request-list {
@@ -28,19 +67,45 @@ header {
   display: flex;
   gap: 8px;
   overflow: hidden;
+  align-items: center;
+}
+
+.request-item[data-filtered='true'] {
+  display: none;
 }
 
 .time {
   color: #888;
   white-space: nowrap;
+  min-width: 60px;
 }
-.method {
+
+.status {
   font-weight: bold;
-  color: #2a7ae2;
+  min-width: 30px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
 }
+
+.method-get { font-weight: bold; color: #2a7ae2; min-width: 40px; }
+.method-post { font-weight: bold; color: #2e7d32; min-width: 40px; }
+.method-put { font-weight: bold; color: #e65100; min-width: 40px; }
+.method-delete { font-weight: bold; color: #c62828; min-width: 40px; }
+.method-patch { font-weight: bold; color: #6a1b9a; min-width: 40px; }
+
+.size {
+  color: #888;
+  white-space: nowrap;
+  min-width: 50px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
 .url {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   color: #333;
+  flex: 1;
+  min-width: 0;
 }

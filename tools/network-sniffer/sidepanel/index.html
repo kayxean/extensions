@@ -6,7 +6,11 @@
   <body>
     <header>
       <h2>Network Sniffer</h2>
-      <button id="clear">Clear Logs</button>
+      <div class="header-actions">
+        <input id="filter" type="text" placeholder="Filter URL…" />
+        <button id="pause-btn">Pause</button>
+        <button id="clear">Clear</button>
+      </div>
     </header>
     <div id="log-container">
       <ul id="request-list"></ul>
