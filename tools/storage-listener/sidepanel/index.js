@@ -1,35 +1,36 @@
 let previousState = { local: {}, session: {}, cookie: {} };
-const container = document.getElementById('diff-container');
-const freezeBtn = document.getElementById('freeze');
-const clearBtn = document.getElementById('clear');
+const container = document.querySelector('#diff-container');
+const freezeBtn = document.querySelector('#freeze');
+const clearBtn = document.querySelector('#clear');
 
 chrome.runtime.onMessage.addListener((message) => {
   if (message.type === 'STORAGE_SNAPSHOT') {
     if (freezeBtn.checked) return;
-    previousState.local = message.payload.local || {};
-    previousState.session = message.payload.session || {};
-    previousState.cookie = message.payload.cookie || {};
-    updateUI(message.storageType);
+    updateUI(message.payload, message.storageType);
+    previousState.local = { ...message.payload.local };
+    previousState.session = { ...message.payload.session };
+    previousState.cookie = { ...message.payload.cookie };
   }
 });
 
-function updateUI(_changedType) {
+function updateUI(payload, _changedType) {
   const fragment = document.createDocumentFragment();
   let hasItems = false;
 
   ['local', 'session', 'cookie'].forEach((type) => {
-    const data = previousState[type];
-    if (!data || Object.keys(data).length === 0) return;
+    const newData = payload[type] || {};
+    const oldData = previousState[type] || {};
+    if (Object.keys(newData).length === 0) return;
     hasItems = true;
 
     const categoryDiv = document.createElement('div');
     categoryDiv.className = 'category';
     categoryDiv.innerHTML = `<span class="category-label">${type}Storage</span>`;
-    fragment.appendChild(categoryDiv);
+    fragment.append(categoryDiv);
 
-    for (let key in data) {
-      const oldVal = previousState[type][key];
-      const newVal = data[key];
+    for (const key in newData) {
+      const oldVal = oldData[key];
+      const newVal = newData[key];
       const isModified = oldVal !== undefined && oldVal !== newVal;
 
       const div = document.createElement('div');
@@ -47,7 +48,7 @@ function updateUI(_changedType) {
           <span class="val">${newVal}</span>
         `;
       }
-      fragment.appendChild(div);
+      fragment.append(div);
     }
   });
 
@@ -59,10 +60,15 @@ function updateUI(_changedType) {
   if (container.querySelector('.empty-msg')) {
     container.innerHTML = '';
   }
-  container.appendChild(fragment);
+  container.append(fragment);
 }
 
-clearBtn.onclick = () => {
+const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+if (tab?.id) {
+  try { await chrome.tabs.sendMessage(tab.id, { type: 'REQUEST_SNAPSHOT' }); } catch (err) { console.error(err); }
+}
+
+clearBtn.addEventListener('click', () => {
   container.innerHTML = '<p class="empty-msg">Log cleared.</p>';
   previousState = { local: {}, session: {}, cookie: {} };
-};
+});

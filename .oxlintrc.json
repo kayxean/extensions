@@ -1,0 +1,26 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["oxc", "unicorn"],
+  "categories": {
+    "correctness": "error",
+    "pedantic": "warn",
+    "perf": "error",
+    "suspicious": "error"
+  },
+  "rules": {
+    "no-console": "off",
+    "unicode-bom": ["error", "never"],
+    "unicorn/no-process-exit": "error",
+    "unicorn/prefer-module": "error",
+    "max-lines": ["error", { "max": 512 }],
+    "max-lines-per-function": ["error", { "max": 100 }],
+    "curly": ["error", "multi-line"],
+    "prefer-const": ["error", { "destructuring": "all" }],
+    "sort-imports": ["error", { "ignoreDeclarationSort": true }],
+    "unicorn/filename-case": ["error", { "case": "kebabCase" }]
+  },
+  "ignorePatterns": ["dist/**"],
+  "env": {
+    "builtin": true
+  }
+}
