@@ -7,7 +7,7 @@ chrome.runtime.onInstalled.addListener(() => {
 let currentTabId = null;
 
 chrome.tabs.onUpdated.addListener(async (tabId, info, tab) => {
-  if (!info.status === 'complete' || !tab.url?.startsWith('http')) return;
+  if (info.status !== 'complete' || !tab.url?.startsWith('http')) return;
   currentTabId = tabId;
 
   try {
@@ -24,7 +24,7 @@ chrome.cookies.onChanged.addListener((changeInfo) => {
   if (!currentTabId) return;
   chrome.tabs.get(currentTabId, (tab) => {
     if (!tab || !tab.url) return;
-    const cookieDomain = changeInfo.cookie.domain.replace(/^\./, '');
+    const cookieDomain = changeInfo.cookie.domain.replace(/^\./u, '');
     if (tab.url.includes(cookieDomain)) {
       void sendStorageUpdate();
     }
@@ -43,7 +43,7 @@ async function sendStorageUpdate() {
   });
   chrome.tabs
     .sendMessage(currentTabId, { type: 'COOKIE_UPDATE', payload: cookieObj })
-    .catch(() => {});
+    .catch(console.error);
 }
 
 function injectStorageMonitor() {
@@ -52,33 +52,29 @@ function injectStorageMonitor() {
 
   let cookieData = {};
 
-  const toObj = (storage) => {
-    const obj = {};
-    for (let i = 0; i < storage.length; i++) {
-      const key = storage.key(i);
-      obj[key] = storage.getItem(key);
-    }
-    return obj;
-  };
-
   const notify = (type) => {
+    const local = {};
+    for (let i = 0; i < localStorage.length; i++) local[localStorage.key(i)] = localStorage.getItem(localStorage.key(i));
+
+    const session = {};
+    for (let i = 0; i < sessionStorage.length; i++) session[sessionStorage.key(i)] = sessionStorage.getItem(sessionStorage.key(i));
+
     chrome.runtime
       .sendMessage({
         type: 'STORAGE_SNAPSHOT',
-        payload: {
-          local: toObj(localStorage),
-          session: toObj(sessionStorage),
-          cookie: cookieData,
-        },
+        payload: { local, session, cookie: cookieData },
         storageType: type,
       })
-      .catch(() => {});
+      .catch(console.error);
   };
 
   chrome.runtime.onMessage.addListener((message) => {
     if (message.type === 'COOKIE_UPDATE') {
       cookieData = message.payload || {};
       notify('cookie');
+    }
+    if (message.type === 'REQUEST_SNAPSHOT') {
+      notify('init');
     }
   });
 
