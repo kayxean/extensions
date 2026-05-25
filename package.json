@@ -1,8 +1,14 @@
 {
   "name": "extensions",
   "private": true,
-  "devDependencies": {
-    "vite-plus": "^0.1.14"
+  "scripts": {
+    "lint": "oxlint",
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check"
   },
-  "packageManager": "pnpm@10.33.0"
+  "devDependencies": {
+    "bun": "^1.2.0",
+    "oxfmt": "^0.51.0",
+    "oxlint": "^1.66.0"
+  }
 }

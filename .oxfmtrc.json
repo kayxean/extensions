@@ -1,0 +1,12 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "semi": true,
+  "singleQuote": true,
+  "sortImports": {
+    "ignoreCase": false,
+    "newlinesBetween": false,
+    "order": "asc"
+  },
+  "sortPackageJson": true,
+  "ignorePatterns": ["dist/**"]
+}
